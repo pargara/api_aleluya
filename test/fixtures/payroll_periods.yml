@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  company: one
+  percentage_of_social_security: 1
+  percentage_of_pension_fund: 1
+  start_date: 2023-04-11
+  end_date: 2023-04-11
+
+two:
+  company: two
+  percentage_of_social_security: 1
+  percentage_of_pension_fund: 1
+  start_date: 2023-04-11
+  end_date: 2023-04-11

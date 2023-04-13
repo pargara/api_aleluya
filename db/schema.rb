@@ -10,9 +10,61 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_10_190704) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_12_145206) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "companies", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name", null: false
+    t.string "phone"
+    t.string "direction"
+    t.string "mail", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_companies_on_user_id"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.bigint "payroll_period_id", null: false
+    t.string "base_salary", null: false
+    t.float "percentage_of_social_security", default: 4.0
+    t.float "percentage_of_pension_fund", default: 4.0
+    t.integer "total_deductions"
+    t.integer "non_salary_income"
+    t.integer "other_salary_income"
+    t.integer "other_dedections"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["payroll_period_id"], name: "index_employees_on_payroll_period_id"
+  end
+
+  create_table "payroll_periods", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.float "percentage_of_social_security"
+    t.float "compensation"
+    t.float "icbf"
+    t.float "sena"
+    t.float "percentage_of_pension_fund"
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.integer "minimum_salary"
+    t.integer "transport_subsidy"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_payroll_periods_on_company_id"
+  end
+
+  create_table "payrolls", force: :cascade do |t|
+    t.bigint "employee_id", null: false
+    t.float "total_deductions"
+    t.float "total_payroll"
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_payrolls_on_employee_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -38,4 +90,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_10_190704) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "companies", "users"
+  add_foreign_key "employees", "payroll_periods"
+  add_foreign_key "payroll_periods", "companies"
+  add_foreign_key "payrolls", "employees"
 end
