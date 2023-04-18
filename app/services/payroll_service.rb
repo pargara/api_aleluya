@@ -1,67 +1,106 @@
 class PayrollService
-  def initialize
-    calculate_salary_plus_subsidy
+  def initialize(data)
+    @data = data
+    calculate_period
+    set_data
   end
 
   def calculate_period
-    @period = self.start_date..self.end_date
+    @period = @data.start_date..@data.end_date
+
+    calculate_salary
   end
   
   def calculate_salary
-    @salary_employee = self.employee.base_salary / @period.size
+    @salary_employee = (@data.employee.base_salary * @period.count) / 30
+
+    calculate_salary_plus_subsidy
   end
 
   def calculate_salary_plus_subsidy
-    # Como?
-    # tengo que subir hasta el empledo si su salario es menor a
-    # 2.5M sumo subsidio de transporte de alli resto Retenciones
-    if @salary_employee > 2500000
-      @total_base_social_prestacions = @salary_employee + self.payroll_period.transport_subsidy
+    if @salary_employee < 2500000
+      @total_base_social_prestations = @salary_employee + @data.employee.payroll_period.transport_subsidy
     end
+
+    calculate_total_income
   end
     
   def calculate_total_income
-    @total_income = @total_base_social_prestations * self.employee.non_salary_income
+    # Por hacer: un setter a 0 para employee.non_salary_income para que no sea nill si no que sea 0
+    @total_income = @total_base_social_prestations 
+    if !@data.employee.non_salary_income.nil?
+      @total_income += @data.employee.non_salary_income
+    end
+
+    calculate_base_ss_parafiscales
   end
 
   def calculate_base_ss_parafiscales
-    @base_ss_parafiscales = @salary_employee * self.employee.other_salary_income
+    @base_ss_parafiscales = @salary_employee
+    if !@data.employee.other_salary_income.nil?
+     @base_ss_parafiscales += @data.employee.other_salary_income
+    end
+
+    calculate_employee_retensions
   end
 
   def calculate_employee_retensions
-    @total_social_security = (@salary_employee * self.employee.percentage_of_social_security) / 100
-    @total_pension_fund = (@salary_employee * self.employee.percentage_of_pension_fund) / 100
-    @total_employee_retensions = @total_social_security + @total_pension_fund
-    @net_salary = @net_salary - @total_employee_retensions
+    @total_health = (@base_ss_parafiscales * @data.employee.percentage_of_social_security) / 100
+    @total_pension_fund = (@base_ss_parafiscales * @data.employee.percentage_of_pension_fund) / 100
+    @total_subsistence_fund = (@base_ss_parafiscales * @data.employee.subsistence_fund) / 100
+    @total_solidarity_fund = (@base_ss_parafiscales * @data.employee.solidarity_fund) / 100
+
+    @total_employee_retensions = @total_health + @total_pension_fund + @total_solidarity_fund + @total_subsistence_fund
+
+    calculate_company_obligations
   end
 
   def calculate_company_obligations
-    @total_company_social_security = (@salary_employee * self.payroll_periods.percentage_of_social_security) / 100
-    @total_company_pension_fund = (@salary_employee * self.payroll_periods.percentage_of_pension_fund) / 100
+    @total_company_health = (@base_ss_parafiscales * @data.employee.payroll_period.percentage_of_social_security) / 100
+    @total_company_pension_fund = (@base_ss_parafiscales * @data.employee.payroll_period.percentage_of_pension_fund) / 100
+    @tota_arl = (@base_ss_parafiscales * @data.employee.payroll_period.percentage_arl) / 100
 
-    @total_employee_retensions = @total_company_social_security + @total_company_pension_fund
+    @total_company_retensions = @total_company_health + @total_company_pension_fund
+
+    calculate_parafiscales
   end
 
   def calculate_parafiscales
-    # falta si la persona gana 10M o mas se le cobran desde el 70% de su salario el 3% del ICBF y del SENA un 2%
+    @total_box_compensation = (@base_ss_parafiscales * 4) / 100
+    @total_parafiscales = @total_box_compensation
     if @salary_employee > 10000000
-      @total_icbf = (@salary_employee * 3) / 100
-      @total_sena = (@salary_employee * 2) / 100
+      @total_icbf = (@base_ss_parafiscales * 3) / 100
+      @total_sena = (@base_ss_parafiscales * 2) / 100
 
-      @total_parafiscales = @total_icbf + @total_sena
+      @total_parafiscales += @total_icbf + @total_sena
     end
+
+    calculate_social_benefits
   end
 
   def calculate_social_benefits
-    # Falta hacer cargar campos al modelo, hacer refactor y dar un solo total
-    @prima_de_servicios = 8.33
-    @tota_cesantias = @net_salary * @prima_de_servicios
+    @prima_de_servicios = 1/12.0
+    @total_cesantias = @prima_de_servicios.round * @total_base_social_prestations
     @total_prima_de_servicios = @total_cesantias
-    @vacations = 4.17
-    @total_vacations = @salaly_employee * @vacations
+    @vacations = 1/24.0
+    @total_vacations = @base_ss_parafiscales * @vacations.round
+
+    @total_social_benefits = @total_cesantias + @total_vacations + @total_prima_de_servicios
+
+    calculate_total_payroll
   end
 
   def calculate_total_payroll
-    @payroll_employee = 
+    @payroll_employee = @total_income - @total_employee_retensions
+    calculate_employee_cost
+  end
+
+  def calculate_employee_cost
+    @cost_employee = @total_income + @total_company_retensions + @total_social_benefits + @total_parafiscales
+  end
+
+  def set_data
+    @data.cost_employee = @cost_employee.round
+    @data.payroll_employee = @payroll_employee.round
   end
 end

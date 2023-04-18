@@ -16,8 +16,8 @@ class PayrollsController < ApplicationController
   # POST /payrolls
   def create
     @payroll = Payroll.new(payroll_params)
-
     if @payroll.save
+
       render json: @payroll, status: :created, location: @payroll
     else
       render json: @payroll.errors, status: :unprocessable_entity
@@ -46,6 +46,6 @@ class PayrollsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def payroll_params
-      params.require(:payroll).permit(:employee_id, :total_deductions, :total_payroll, :start_date, :end_date)
+      params.require(:payroll).permit(:employee_id, :cost_employee, :payroll_employee, :start_date, :end_date)
     end
 end

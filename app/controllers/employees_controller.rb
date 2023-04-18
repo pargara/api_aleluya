@@ -46,6 +46,6 @@ class EmployeesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def employee_params
-      params.require(:employee).permit(:payroll_period_id, :salary, :percentage_of_social_security, :percentage_of_pension_fund, :total_deductions, :non-salary_income, :other_dedections)
+      params.require(:employee).permit(:payroll_period_id, :base_salary, :percentage_of_social_security, :percentage_of_pension_fund, :total_deductions, :non_salary_income, :other_dedections, :name, :document_identity)
     end
 end

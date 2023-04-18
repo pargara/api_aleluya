@@ -6,5 +6,7 @@ class Employee < ApplicationRecord
   belongs_to :payroll_period
   has_many :payrolls
 	
-	validates :salary presence: true
+	validates :base_salary, presence: true
+	validates :name, presence: true
+	validates :document_identity, presence: true
 end

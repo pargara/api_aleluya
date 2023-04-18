@@ -27,13 +27,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_145206) do
 
   create_table "employees", force: :cascade do |t|
     t.bigint "payroll_period_id", null: false
-    t.string "base_salary", null: false
-    t.float "percentage_of_social_security", default: 4.0
-    t.float "percentage_of_pension_fund", default: 4.0
+    t.string "name", null: false
+    t.integer "document_identity", null: false
+    t.integer "base_salary", null: false
+    t.float "percentage_of_social_security"
+    t.float "percentage_of_pension_fund"
+    t.float "solidarity_fund"
+    t.float "subsistence_fund"
     t.integer "total_deductions"
     t.integer "non_salary_income"
     t.integer "other_salary_income"
-    t.integer "other_dedections"
+    t.integer "other_deductions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["payroll_period_id"], name: "index_employees_on_payroll_period_id"
@@ -42,10 +46,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_145206) do
   create_table "payroll_periods", force: :cascade do |t|
     t.bigint "company_id", null: false
     t.float "percentage_of_social_security"
+    t.float "percentage_of_pension_fund"
+    t.float "percentage_arl"
     t.float "compensation"
     t.float "icbf"
     t.float "sena"
-    t.float "percentage_of_pension_fund"
     t.date "start_date", null: false
     t.date "end_date", null: false
     t.integer "minimum_salary"
@@ -57,8 +62,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_145206) do
 
   create_table "payrolls", force: :cascade do |t|
     t.bigint "employee_id", null: false
-    t.float "total_deductions"
-    t.float "total_payroll"
+    t.float "cost_employee"
+    t.float "payroll_employee"
     t.date "start_date", null: false
     t.date "end_date", null: false
     t.datetime "created_at", null: false

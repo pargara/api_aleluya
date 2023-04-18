@@ -3,10 +3,11 @@ class CreatePayrollPeriods < ActiveRecord::Migration[7.0]
     create_table :payroll_periods do |t|
       t.belongs_to :company, null: false, foreign_key: true
       t.float :percentage_of_social_security
+      t.float :percentage_of_pension_fund
+      t.float :percentage_arl
       t.float :compensation
       t.float :icbf
       t.float :sena
-      t.float :percentage_of_pension_fund
       t.date :start_date, null: false
       t.date :end_date, null: false
 			t.integer :minimum_salary
