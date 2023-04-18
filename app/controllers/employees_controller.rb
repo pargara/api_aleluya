@@ -5,7 +5,7 @@ class EmployeesController < ApplicationController
   def index
     @employees = Employee.all
 
-    render json: @employees
+    # render json: @employees
   end
 
   # GET /employees/1
@@ -18,7 +18,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.new(employee_params)
 
     if @employee.save
-      render json: @employee, status: :created, location: @employee
+      render :create, status: :created, location: @employee
     else
       render json: @employee.errors, status: :unprocessable_entity
     end

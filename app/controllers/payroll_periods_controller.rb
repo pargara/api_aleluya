@@ -5,7 +5,7 @@ class PayrollPeriodsController < ApplicationController
   def index
     @payroll_periods = PayrollPeriod.all
 
-    render json: @payroll_periods
+    # render json: @payroll_periods
   end
 
   # GET /payroll_periods/1
@@ -18,7 +18,8 @@ class PayrollPeriodsController < ApplicationController
     @payroll_period = PayrollPeriod.new(payroll_period_params)
 
     if @payroll_period.save
-      render json: @payroll_period, status: :created, location: @payroll_period
+      # render json: @payroll_period, status: :created, location: @payroll_period
+      render :create, status: :created, location: @payroll_period
     else
       render json: @payroll_period.errors, status: :unprocessable_entity
     end

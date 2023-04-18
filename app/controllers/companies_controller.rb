@@ -4,8 +4,6 @@ class CompaniesController < ApplicationController
   # GET /companies
   def index
     @companies = Company.all
-
-    render json: @companies
   end
 
   # GET /companies/1
@@ -18,7 +16,7 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
 
     if @company.save
-      render json: @company, status: :created, location: @company
+      render :create, status: :created, location: @company
     else
       render json: @company.errors, status: :unprocessable_entity
     end
