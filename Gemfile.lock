@@ -180,6 +180,7 @@ DEPENDENCIES
   bootsnap
   debug
   devise_token_auth
+  i18n
   jbuilder
   pg (~> 1.1)
   puma (~> 5.0)

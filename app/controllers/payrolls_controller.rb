@@ -20,7 +20,8 @@ class PayrollsController < ApplicationController
 
       render :create, status: :created, location: @payroll
     else
-      render json: @payroll.errors, status: :unprocessable_entity
+      # render json: @payroll.errors, status: :unprocessable_entity
+      render 'errors/errors', locals: {object: @payroll}, formats: :json, status: :unprocessable_entity
     end
   end
 
@@ -29,7 +30,8 @@ class PayrollsController < ApplicationController
     if @payroll.update(payroll_params)
       render json: @payroll
     else
-      render json: @payroll.errors, status: :unprocessable_entity
+      # render json: @payroll.errors, status: :unprocessable_entity
+      render 'errors/errors', locals: {object: @payroll}, formats: :json, status: :unprocessable_entity
     end
   end
 

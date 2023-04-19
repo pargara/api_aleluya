@@ -1,0 +1,56 @@
+es:
+  activerecord:
+    models:
+      User: "Usuario"
+      Company: "Empresa"
+      Payroll_period: "Periodo de nomina"
+      Employee: "Empleado"
+      Payroll: "Nomina"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "El correo no puede estar vacio"
+              taken: "el correo ya está en uso"
+            password:
+              blank: "La contraseña no puede estar vacia"
+            password_confirmation:
+              blank: "La confirmacion de la contraseña no puede estar vacia"
+              confirmation: "La confirmacion de contraseña es distinta a la contraseña"
+        company:
+          attributes:
+            name:
+              blank: "El nombre no puede estar vacio"
+              taken: "el nombre ya está en uso"
+            mail:
+              blank: "El correo no puede estar vacio"
+            user:
+              blank: "El usuario no puede estar vacio"
+              required: "El usuario debe de existir"
+        payroll_period:
+          attributes:
+            start_date:
+              blank: "La fecha de inicio no puede estar vacia"
+            end_date:
+              blank: "La fecha final no puede estar vacia"
+            company:
+              required: "La compañia debe de existir"
+        employee:
+          attributes:
+            name:
+              blank: "El nombre del empleado no puede estar vacio"
+            document_identity:
+              blank: "El numero de identificacion del empleado no puede estar vacio"
+            base_salary:
+              blank: "El salario base del empleado no puede estar vacio"
+            payroll_period:
+              required: "El periodo de nomina debe de existir"
+        payroll:
+          attributes:
+            start_date:
+              blank: "La fecha de inicio no puede estar vacia"
+            end_date:
+              blank: "La fecha final no puede estar vacia"
+            employee:
+              required: "El empleado debe de existir"
