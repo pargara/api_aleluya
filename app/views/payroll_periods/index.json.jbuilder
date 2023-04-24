@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.data do
   json.array! @payroll_periods do |period|
     json.company_name period.company.name

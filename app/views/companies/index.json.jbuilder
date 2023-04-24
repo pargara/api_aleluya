@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.data do
   json.array! @companies do |company|
     json.user_id company.user_id
