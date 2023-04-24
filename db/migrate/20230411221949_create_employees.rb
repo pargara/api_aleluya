@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateEmployees < ActiveRecord::Migration[7.0]
   def change
     create_table :employees do |t|
@@ -7,6 +9,7 @@ class CreateEmployees < ActiveRecord::Migration[7.0]
       t.integer :base_salary, null: false
       t.float :percentage_of_social_security
       t.float :percentage_of_pension_fund
+      t.float :percentage_arl
       t.float :solidarity_fund
       t.float :subsistence_fund
       t.integer :total_deductions
