@@ -1,21 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  payroll_period: one
-  salary: MyString
-  percentage_of_social_security: 1.5
-  percentage_of_pension_fund: 1.5
-  total_deductions: 1
-  non-salary_income: 1
-  transport_allowance: MyString
-  other_dedections: 1
-
-two:
-  payroll_period: two
-  salary: MyString
-  percentage_of_social_security: 1.5
-  percentage_of_pension_fund: 1.5
-  total_deductions: 1
-  non-salary_income: 1
-  transport_allowance: MyString
-  other_dedections: 1
+employee_one:
+  payroll_period: payroll_period_one
+  name: "Sebastian Guevara"
+  base_salary: 1000
+  document_identity: "123456789"
+  percentage_of_social_security: 4
+  percentage_of_pension_fund: 4
+  solidarity_fund: 1
