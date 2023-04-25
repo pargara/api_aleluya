@@ -6,7 +6,7 @@ class PayrollPeriod < ApplicationRecord
   before_create :set_payroll_period_values
 
   belongs_to :company
-  has_many :employees
+  has_many :employees, dependent: :destroy
 
   validates :start_date, presence: true
   validates :end_date, presence: true

@@ -2,8 +2,11 @@
 employee_one:
   payroll_period: payroll_period_one
   name: "Sebastian Guevara"
-  base_salary: 1000
+  base_salary: 750000
   document_identity: "123456789"
   percentage_of_social_security: 4
   percentage_of_pension_fund: 4
   solidarity_fund: 1
+  percentage_arl: 0.522,
+  solidarity_fund: 1.0,
+  subsistence_fund: 0.0,

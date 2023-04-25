@@ -4,7 +4,7 @@ require 'test_helper'
 
 class PayrollPeriodsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @payroll_period = payroll_periods(:one)
+    @payroll_period = payroll_periods(:payroll_period_one)
   end
 
   test 'should get index' do

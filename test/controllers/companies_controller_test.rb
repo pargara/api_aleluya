@@ -16,7 +16,7 @@ class CompaniesControllerTest < ActionDispatch::IntegrationTest
   test 'should create company' do
     assert_difference('Company.count') do
       post companies_url,
-           params: { company: { direction: @company.direction, mail: @company.mail, name: @company.name, phone: @company.phone, user_id: @user } }, as: :json
+        params: { company: { direction: @company.direction, mail: @company.mail, name: "Aleluya-", phone: @company.phone, user_id: @company.user_id } }, as: :json
     end
 
     assert_response :created

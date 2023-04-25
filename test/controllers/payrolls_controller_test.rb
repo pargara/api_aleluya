@@ -4,7 +4,7 @@ require 'test_helper'
 
 class PayrollsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @payroll = payrolls(:one)
+    @payroll = payrolls(:payroll_one)
   end
 
   test 'should get index' do
@@ -15,7 +15,7 @@ class PayrollsControllerTest < ActionDispatch::IntegrationTest
   test 'should create payroll' do
     assert_difference('Payroll.count') do
       post payrolls_url,
-           params: { payroll: { employee_id: @payroll.employee_id, end_date: @payroll.end_date, start_date: @payroll.start_date, total_deductions: @payroll.total_deductions, total_payroll: @payroll.total_payroll } }, as: :json
+           params: { payroll: { employee_id: @payroll.employee_id, end_date: @payroll.end_date, start_date: @payroll.start_date, cost_employee: @payroll.cost_employee, payroll_employee: @payroll.payroll_employee } }, as: :json
     end
 
     assert_response :created
@@ -28,7 +28,7 @@ class PayrollsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should update payroll' do
     patch payroll_url(@payroll),
-          params: { payroll: { employee_id: @payroll.employee_id, end_date: @payroll.end_date, start_date: @payroll.start_date, total_deductions: @payroll.total_deductions, total_payroll: @payroll.total_payroll } }, as: :json
+          params: { payroll: { employee_id: @payroll.employee_id, end_date: @payroll.end_date, start_date: @payroll.start_date, cost_employee: @payroll.cost_employee, payroll_employee: @payroll.payroll_employee } }, as: :json
     assert_response :success
   end
 

@@ -10,11 +10,11 @@ class PayrollTest < ActiveSupport::TestCase
 
   test 'colums valid is valid' do
     assert Payroll.column_names.include?('cost_employee'), 'column cost_employee is included in Payroll'
-    assert_equal 'integer', payroll_column_class('cost_employee').type.to_s, 'cost_employee column is a float'
+    assert_equal 'float', payroll_column_class('cost_employee').type.to_s, 'cost_employee column is a float'
     assert payroll_column_class('cost_employee').null, 'cost_employee column can be null'
 
     assert Payroll.column_names.include?('payroll_employee'), 'column payroll_employee is included in Payroll'
-    assert_equal 'integer', payroll_column_class('payroll_employee').type.to_s, 'payroll_employee column is a float'
+    assert_equal 'float', payroll_column_class('payroll_employee').type.to_s, 'payroll_employee column is a float'
     assert payroll_column_class('payroll_employee').null, 'payroll_employee column can be null'
 
     assert Payroll.column_names.include?('start_date'), 'column start_date is included in Payroll'
@@ -44,7 +44,7 @@ class PayrollTest < ActiveSupport::TestCase
     assert_not payroll.save, 'payroll cant be created with unsafe params'
   end
 
-  def payroll_column_class(_column_name)
-    Payroll.columns.detect { |c| c.name == column.to_s }
+  def payroll_column_class(column_name)
+    Payroll.columns.detect { |c| c.name == column_name.to_s }
   end
 end

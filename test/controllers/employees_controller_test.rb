@@ -2,7 +2,7 @@ require "test_helper"
 
 class EmployeesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @employee = employees(:one)
+    @employee = employees(:employee_one)
   end
 
   test "should get index" do
@@ -12,7 +12,7 @@ class EmployeesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create employee" do
     assert_difference("Employee.count") do
-      post employees_url, params: { employee: { non-salary_income: @employee.non-salary_income, other_dedections: @employee.other_dedections, payroll_period_id: @employee.payroll_period_id, percentage_of_pension_fund: @employee.percentage_of_pension_fund, percentage_of_social_security: @employee.percentage_of_social_security, salary: @employee.salary, total_deductions: @employee.total_deductions, transport_allowance: @employee.transport_allowance } }, as: :json
+      post employees_url, params: { employee: { name: @employee.name, document_identity: @employee.document_identity, base_salary: @employee.base_salary, other_deductions: @employee.other_deductions, payroll_period_id: @employee.payroll_period_id, percentage_of_pension_fund: @employee.percentage_of_pension_fund, percentage_of_social_security: @employee.percentage_of_social_security, total_deductions: @employee.total_deductions} }, as: :json
     end
 
     assert_response :created
@@ -24,7 +24,7 @@ class EmployeesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update employee" do
-    patch employee_url(@employee), params: { employee: { non-salary_income: @employee.non-salary_income, other_dedections: @employee.other_dedections, payroll_period_id: @employee.payroll_period_id, percentage_of_pension_fund: @employee.percentage_of_pension_fund, percentage_of_social_security: @employee.percentage_of_social_security, salary: @employee.salary, total_deductions: @employee.total_deductions, transport_allowance: @employee.transport_allowance } }, as: :json
+    patch employee_url(@employee), params: { employee: { name: @employee.name, document_identity: @employee.document_identity, base_salary: @employee.base_salary, other_deductions: @employee.other_deductions, payroll_period_id: @employee.payroll_period_id, percentage_of_pension_fund: @employee.percentage_of_pension_fund, percentage_of_social_security: @employee.percentage_of_social_security, total_deductions: @employee.total_deductions} }, as: :json
     assert_response :success
   end
 

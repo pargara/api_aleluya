@@ -3,13 +3,13 @@
 company_one:
   user: user_one
   name: "Aleluya"
-  phone: 1234
+  phone: 123456789
   direction: "1 Street"
   mail: "example@aleluya.com"
 
 company_two:
   user: user_one
   name: ""
-  phone: 1234
+  phone: 12345678910
   direction: "1 Street"
   mail: ""

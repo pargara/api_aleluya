@@ -36,10 +36,6 @@ class PayrollPeriodTest < ActiveSupport::TestCase
     assert payroll_period_column_class('percentage_of_pension_fund').null,
            'percentage_of_pension_fund column can be null'
 
-    assert PayrollPeriod.column_names.include?('percentage_arl'), 'column percentage_arl is included in PayrollPeriod'
-    assert_equal 'float', payroll_period_column_class('percentage_arl').type.to_s, 'percentage_arl column is a float'
-    assert payroll_period_column_class('percentage_arl').null, 'percentage_arl column can be null'
-
     assert PayrollPeriod.column_names.include?('compensation'), 'column compensation is included in PayrollPeriod'
     assert_equal 'float', payroll_period_column_class('compensation').type.to_s, 'compensation column is a float'
     assert payroll_period_column_class('compensation').null, 'compensation column can be null'
@@ -81,7 +77,7 @@ class PayrollPeriodTest < ActiveSupport::TestCase
     assert_not payroll_period.save, 'Payroll period cant be saved with unsafe params'
   end
 
-  def payroll_period_column_class(column)
-    PayrollPeriod.columns.detect { |c| c.name == column.to_s }
+  def payroll_period_column_class(column_name)
+    PayrollPeriod.columns.detect { |c| c.name == column_name.to_s }
   end
 end

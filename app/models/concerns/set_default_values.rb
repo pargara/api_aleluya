@@ -8,7 +8,6 @@ module SetDefaultValues
     self.percentage_of_pension_fund = 12
     self.minimum_salary = 1_160_000
     self.transport_subsidy = 140_000
-
   end
 
   def set_employee_values
@@ -16,8 +15,10 @@ module SetDefaultValues
     self.percentage_of_pension_fund = 4
     self.solidarity_fund = 1
 
-    set_subsistence_fund
-    set_arl
+    @salaries = non_salary_income ? (non_salary_income * base_salary) / payroll_period.minimum_salary : base_salary / payroll_period.minimum_salary
+
+    set_subsistence_fund(@salaries)
+    set_solidarity_fund(@salaries)
   end
 
   def set_payroll_values
@@ -25,9 +26,7 @@ module SetDefaultValues
     self.total_deductions = method_from_service
   end
 
-  def set_subsistence_fund
-    @salaries = non_salary_income ? (non_salary_income * base_salary) / payroll_period.minimum_salary : base_salary / payroll_period.minimum_salary
-
+  def set_subsistence_fund(salaries)
     # @salaries = (self.base_salary * self.non_salary_income) / self.payroll_period.minimum_salary
     self.subsistence_fund = case @salaries
                             when 0..16
@@ -57,6 +56,14 @@ module SetDefaultValues
       self.percentage_arl = 4.350
     when 'V'
       self.percentage_arl = 6.960
+    end
+  end
+
+  def set_solidarity_fund(salaries)
+    if salaries >= 4
+      self.solidarity_fund = 1
+    else
+      self.solidarity_fund = 0
     end
   end
 end
