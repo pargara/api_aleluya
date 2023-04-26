@@ -22,8 +22,8 @@ module SetDefaultValues
   end
 
   def set_payroll_values
-    self.total_payroll = method_from_service
-    self.total_deductions = method_from_service
+    self.start_date = self.employee.payroll_period.start_date
+    self.end_date = self.employee.payroll_period.end_date
   end
 
   def set_subsistence_fund(salaries)
