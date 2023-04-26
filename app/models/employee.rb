@@ -7,7 +7,7 @@ class Employee < ApplicationRecord
   before_create :set_arl
 
   belongs_to :payroll_period
-  has_many :payrolls, dependent: :destroy
+  has_one :payroll, dependent: :destroy
 
   validates :base_salary, presence: true
   validates :name, presence: true

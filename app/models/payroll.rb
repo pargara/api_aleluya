@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 class Payroll < ApplicationRecord
+  include SetDefaultValues
+
   belongs_to :employee
 
-  before_save :call_service
+  before_create :set_payroll_values
+  before_create :call_service
 
-  validates :start_date, presence: true
-  validates :end_date, presence: true
 
   private
 
