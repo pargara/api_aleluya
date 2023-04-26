@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class EmployeesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_employee, only: %i[show update destroy]
 
   # GET /employees
   def index
+    @companies = current_user.companies
     @employees = Employee.all
 
     # render json: @employees

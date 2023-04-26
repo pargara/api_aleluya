@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 class PayrollsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_payroll, only: %i[show update destroy]
 
   # GET /payrolls
   def index
-    @payrolls = Payroll.all
-
+    # @payrolls = Payroll.all
+    @payrolls = Payroll.joins(employee: {payroll_period: :company}).where(companies: {user_id: current_user.id})
     # render json: @payrolls
   end
 

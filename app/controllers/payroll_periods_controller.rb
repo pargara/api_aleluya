@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class PayrollPeriodsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_payroll_period, only: %i[show update destroy]
 
   # GET /payroll_periods
   def index
+    @companies = current_user.companies
     @payroll_periods = PayrollPeriod.all
-
-    # render json: @payroll_periods
   end
 
   # GET /payroll_periods/1

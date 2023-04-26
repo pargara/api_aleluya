@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class CompaniesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_company, only: %i[show update destroy]
 
   # GET /companies
   def index
-    @companies = Company.all
+    @companies = current_user.companies
+    #@companies = Company.all
   end
 
   # GET /companies/1
