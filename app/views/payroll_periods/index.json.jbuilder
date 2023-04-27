@@ -6,7 +6,6 @@ json.data do
 			json.company_name period.company.name
 			json.start_date period.start_date
 			json.end_date period.end_date
-			binding.break
 			json.payrolls period.employees do |employee|
 				json.payroll_id employee.payroll.id
 				json.employee_name employee.payroll.employee.name

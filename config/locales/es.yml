@@ -1,4 +1,7 @@
 es:
+  devise:
+    failure:
+      unauthenticated: "No tienes permisos para hacer esta accion (inicia sesion)"
   activerecord:
     models:
       User: "Usuario"
