@@ -3,12 +3,14 @@ class PayrollService
 
   def initialize(data)
     @data = data
+
     calculate_period
     set_data
   end
 
   def calculate_period
     @period = @data.start_date..@data.end_date
+
     calculate_salary
   end
   
