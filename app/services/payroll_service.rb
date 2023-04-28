@@ -19,19 +19,21 @@ class PayrollService
 
   def calculate_base_ss_parafiscales
     @base_ss_parafiscales = @salary_employee
+
     if !@data.employee.other_salary_income.nil?
      @base_ss_parafiscales += @data.employee.other_salary_income
     end
+
     calculate_salary_plus_subsidy
   end
 
   def calculate_salary_plus_subsidy
     if @salary_employee < 2500000
-      #binding.break
       @total_base_social_prestations = @base_ss_parafiscales + @data.employee.payroll_period.transport_subsidy
     else
       @total_base_social_prestations = @base_ss_parafiscales
     end
+
     calculate_total_income
   end
     
@@ -40,6 +42,7 @@ class PayrollService
     if !@data.employee.non_salary_income.nil?
       @total_income += @data.employee.non_salary_income
     end
+
     calculate_employee_retensions
   end
 
@@ -60,6 +63,7 @@ class PayrollService
     @total_arl = (@base_ss_parafiscales * @data.employee.percentage_arl) / 100
 
     @total_company_retensions = @total_company_health + @total_company_pension_fund + @total_arl
+
     calculate_parafiscales
   end
 
@@ -73,6 +77,7 @@ class PayrollService
 
       @total_parafiscales += @total_icbf + @total_sena
     end
+
     calculate_social_benefits
   end
 
@@ -87,11 +92,13 @@ class PayrollService
     @total_vacations = @base_ss_parafiscales * @vacations
 
     @total_social_benefits = @total_cesantias.round + @total_vacations.round + @total_prima_de_servicios + @total_interest_on_cesantias.round
+
     calculate_total_payroll
   end
 
   def calculate_total_payroll
     @payroll_employee = @total_income - @total_employee_retensions
+
     calculate_employee_cost
   end
 

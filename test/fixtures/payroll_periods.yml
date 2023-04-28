@@ -3,7 +3,7 @@
 payroll_period_one:
   company: company_one
   start_date: "2023-01-01"
-  end_date: "2023-02-01"
+  end_date: "2023-01-31"
   percentage_of_social_security: 8.5
   percentage_of_pension_fund: 12
   minimum_salary: 1160000

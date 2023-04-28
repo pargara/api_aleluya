@@ -5,7 +5,6 @@ require 'test_helper'
 class PayrollPeriodTest < ActiveSupport::TestCase
   def setup
     @company = companies(:company_one)
-    # @faild_payroll_period = payroll_periods(:payroll_period_two)
     @payroll_period = payroll_periods(:payroll_period_one)
   end
 

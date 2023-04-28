@@ -16,6 +16,7 @@ class PayrollsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should get index' do
     get payrolls_url, headers: @auth_tokens, as: :json
+
     assert_response :success
   end
 
@@ -30,12 +31,14 @@ class PayrollsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should show payroll' do
     get payroll_url(@payroll), headers: @auth_tokens, as: :json
+
     assert_response :success
   end
 
   test 'should update payroll' do
     patch payroll_url(@payroll),
           params: { payroll: { employee_id: @payroll.employee_id, end_date: @payroll.end_date, start_date: @payroll.start_date, cost_employee: @payroll.cost_employee, payroll_employee: @payroll.payroll_employee } }, headers: @auth_tokens, as: :json
+
     assert_response :success
   end
 

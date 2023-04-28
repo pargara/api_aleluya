@@ -15,14 +15,15 @@ class PayrollPeriodsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should get index' do
     get payroll_periods_url, headers: @auth_tokens, as: :json
+
     assert_response :success
   end
 
   test 'should create payroll_period' do
     assert_difference('PayrollPeriod.count') do
-      binding.break
+      # binding.break
       post payroll_periods_url,
-           params: { payroll_period: { company_id: @payroll_period.company_id, end_date: @payroll_period.end_date, percentage_of_pension_fund: @payroll_period.percentage_of_pension_fund, percentage_of_social_security: @payroll_period.percentage_of_social_security, start_date: @payroll_period.start_date } }, headers: @auth_tokens, as: :json
+           params: { payroll_period: { company_id: @payroll_period.company_id, start_date: @payroll_period.start_date, end_date: @payroll_period.end_date, percentage_of_pension_fund: @payroll_period.percentage_of_pension_fund, percentage_of_social_security: @payroll_period.percentage_of_social_security } }, headers: @auth_tokens, as: :json
     end
 
     assert_response :created
@@ -30,6 +31,7 @@ class PayrollPeriodsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should show payroll_period' do
     get payroll_period_url(@payroll_period), headers: @auth_tokens, as: :json
+
     assert_response :success
   end
 

@@ -7,7 +7,6 @@ class CompaniesController < ApplicationController
   # GET /companies
   def index
     @companies = current_user.companies
-    #@companies = Company.all
   end
 
   # GET /companies/1
@@ -22,7 +21,6 @@ class CompaniesController < ApplicationController
     if @company.save
       render :create, status: :created, location: @company
     else
-      # render json: @company.errors, status: :unprocessable_entity
       render 'errors/errors', locals: { object: @company }, formats: :json, status: :unprocessable_entity
     end
   end
@@ -32,7 +30,6 @@ class CompaniesController < ApplicationController
     if @company.update(company_params)
       render json: @company
     else
-      # render json: @company.errors, status: :unprocessable_entity
       render 'errors/errors', locals: { object: @company }, formats: :json, status: :unprocessable_entity
     end
   end

@@ -6,9 +6,7 @@ class PayrollsController < ApplicationController
 
   # GET /payrolls
   def index
-    # @payrolls = Payroll.all
     @payrolls = Payroll.joins(employee: {payroll_period: :company}).where(companies: {user_id: current_user.id})
-    # render json: @payrolls
   end
 
   # GET /payrolls/1
@@ -23,7 +21,6 @@ class PayrollsController < ApplicationController
 
       render :create, status: :created, location: @payroll
     else
-      # render json: @payroll.errors, status: :unprocessable_entity
       render 'errors/errors', locals: { object: @payroll }, formats: :json, status: :unprocessable_entity
     end
   end
@@ -33,7 +30,6 @@ class PayrollsController < ApplicationController
     if @payroll.update(payroll_params)
       render json: @payroll
     else
-      # render json: @payroll.errors, status: :unprocessable_entity
       render 'errors/errors', locals: { object: @payroll }, formats: :json, status: :unprocessable_entity
     end
   end

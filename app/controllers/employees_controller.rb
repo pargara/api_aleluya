@@ -8,8 +8,6 @@ class EmployeesController < ApplicationController
   def index
     @companies = current_user.companies
     @employees = Employee.all
-
-    # render json: @employees
   end
 
   # GET /employees/1
@@ -24,7 +22,6 @@ class EmployeesController < ApplicationController
     if @employee.save
       render :create, status: :created, location: @employee
     else
-      # render json: @employee.errors, status: :unprocessable_entity
       render 'errors/errors', locals: { object: @employee }, formats: :json, status: :unprocessable_entity
     end
   end
@@ -34,7 +31,6 @@ class EmployeesController < ApplicationController
     if @employee.update(employee_params)
       render json: @employee
     else
-      # render json: @employee.errors, status: :unprocessable_entity
       render 'errors/errors', locals: { object: @employee }, formats: :json, status: :unprocessable_entity
     end
   end

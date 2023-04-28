@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PayrollPeriodsController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   before_action :set_payroll_period, only: %i[show update destroy]
 
   # GET /payroll_periods
@@ -20,10 +20,8 @@ class PayrollPeriodsController < ApplicationController
     @payroll_period = PayrollPeriod.new(payroll_period_params)
 
     if @payroll_period.save
-      # render json: @payroll_period, status: :created, location: @payroll_period
       render :create, status: :created, location: @payroll_period
     else
-      # render json: @payroll_period.errors, status: :unprocessable_entity
       render 'errors/errors', locals: { object: @payroll_period }, formats: :json, status: :unprocessable_entity
     end
   end
@@ -33,7 +31,6 @@ class PayrollPeriodsController < ApplicationController
     if @payroll_period.update(payroll_period_params)
       render json: @payroll_period
     else
-      # render json: @payroll_period.errors, status: :unprocessable_entity
       render 'errors/errors', locals: { object: @payroll_period }, formats: :json, status: :unprocessable_entity
     end
   end

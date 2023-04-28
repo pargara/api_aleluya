@@ -8,7 +8,6 @@ class Payroll < ApplicationRecord
   before_create :set_payroll_values
   before_create :call_service
 
-
   private
 
   def call_service
