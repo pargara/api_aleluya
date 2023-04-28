@@ -49,7 +49,6 @@ class PayrollPeriodsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def payroll_period_params
-    params.require(:payroll_period).permit(:company_id, :percentage_of_social_security, :percentage_of_pension_fund,
-                                           :start_date, :end_date, :minimum_salary, :transport_subsidy)
+    params.require(:payroll_period).permit(:company_id, :start_date, :end_date)
   end
 end
