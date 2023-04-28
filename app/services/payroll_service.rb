@@ -54,7 +54,12 @@ class PayrollService
     @total_subsistence_fund = (@base_ss_parafiscales * @data.employee.subsistence_fund) / 100
     @total_solidarity_fund = (@base_ss_parafiscales * @data.employee.solidarity_fund) / 100
 
+
     @total_employee_retensions = @total_health + @total_pension_fund + @total_subsistence_fund + @total_solidarity_fund
+
+    if !@data.employee.total_deductions.nil?
+      @total_employee_retensions += @data.employee.total_deductions
+    end
 
     calculate_company_obligations
   end
