@@ -1,0 +1,40 @@
+name: minitest
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: 
+      - 'master'
+      - 'models'
+
+jobs:
+  test:
+    services:
+      db:
+        image: postgress:11
+        ports: ['5432:5432']
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.1
+      
+      - name: Install dependencies
+        run: |
+          gem install bundler
+      
+      - name: Install Gems
+        run: |
+          bundle install
+          
+      - name: Prepare Database
+        run: |
+          rails db:create
+          rails db:migrate
+      
+      - name: Run test
+        run: rails test test/
