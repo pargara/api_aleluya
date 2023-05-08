@@ -1,15 +1,8 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  employee: one
-  total_deductions: 1.5
-  total_payroll: 1.5
-  start_date: 2023-04-12
-  end_date: 2023-04-12
-
-two:
-  employee: two
-  total_deductions: 1.5
-  total_payroll: 1.5
-  start_date: 2023-04-12
-  end_date: 2023-04-12
+payroll_one:
+  employee: employee_one
+  cost_employee: 2000000
+  payroll_employee: 1400000
+  start_date: "2023-02-01"
+  end_date: "2023-03-01"

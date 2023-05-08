@@ -1,11 +1,11 @@
+# frozen_string_literal: true
+
 class CompaniesController < ApplicationController
-  before_action :set_company, only: %i[ show update destroy ]
+  before_action :set_company, only: %i[show update destroy]
 
   # GET /companies
   def index
     @companies = Company.all
-
-    render json: @companies
   end
 
   # GET /companies/1
@@ -18,9 +18,10 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
 
     if @company.save
-      render json: @company, status: :created, location: @company
+      render :create, status: :created, location: @company
     else
-      render json: @company.errors, status: :unprocessable_entity
+      # render json: @company.errors, status: :unprocessable_entity
+      render 'errors/errors', locals: { object: @company }, formats: :json, status: :unprocessable_entity
     end
   end
 
@@ -29,7 +30,8 @@ class CompaniesController < ApplicationController
     if @company.update(company_params)
       render json: @company
     else
-      render json: @company.errors, status: :unprocessable_entity
+      # render json: @company.errors, status: :unprocessable_entity
+      render 'errors/errors', locals: { object: @company }, formats: :json, status: :unprocessable_entity
     end
   end
 
@@ -39,13 +41,14 @@ class CompaniesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_company
-      @company = Company.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def company_params
-      params.require(:company).permit(:user_id, :name, :phone, :direction, :mail)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_company
+    @company = Company.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def company_params
+    params.require(:company).permit(:user_id, :name, :phone, :direction, :mail)
+  end
 end

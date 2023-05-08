@@ -1,15 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user: one
-  name: MyString
-  phone: MyString
-  direction: MyString
-  mail: MyString
+company_one:
+  user: user_one
+  name: "Aleluya"
+  phone: 1234
+  direction: "1 Street"
+  mail: "example@aleluya.com"
 
-two:
-  user: two
-  name: MyString
-  phone: MyString
-  direction: MyString
-  mail: MyString
+company_two:
+  user: user_one
+  name: ""
+  phone: 1234
+  direction: "1 Street"
+  mail: ""

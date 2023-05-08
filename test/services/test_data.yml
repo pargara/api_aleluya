@@ -1,0 +1,11 @@
+data_one:
+  period: = 30
+  salary_employee: 750000
+  total_base_social_prestations: 890000
+  total_income: 890000
+  base_ss_parafiscales: 750000
+  total_employee_rentensions: 60000
+  total_parafiscales: 30000
+  total_social_benefits: 179584
+  payroll_employee: 830000
+  cost_employee: 1253334

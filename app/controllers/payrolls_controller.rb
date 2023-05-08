@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 class PayrollsController < ApplicationController
-  before_action :set_payroll, only: %i[ show update destroy ]
+  before_action :set_payroll, only: %i[show update destroy]
 
   # GET /payrolls
   def index
     @payrolls = Payroll.all
 
-    render json: @payrolls
+    # render json: @payrolls
   end
 
   # GET /payrolls/1
@@ -18,9 +20,10 @@ class PayrollsController < ApplicationController
     @payroll = Payroll.new(payroll_params)
     if @payroll.save
 
-      render json: @payroll, status: :created, location: @payroll
+      render :create, status: :created, location: @payroll
     else
-      render json: @payroll.errors, status: :unprocessable_entity
+      # render json: @payroll.errors, status: :unprocessable_entity
+      render 'errors/errors', locals: { object: @payroll }, formats: :json, status: :unprocessable_entity
     end
   end
 
@@ -29,7 +32,8 @@ class PayrollsController < ApplicationController
     if @payroll.update(payroll_params)
       render json: @payroll
     else
-      render json: @payroll.errors, status: :unprocessable_entity
+      # render json: @payroll.errors, status: :unprocessable_entity
+      render 'errors/errors', locals: { object: @payroll }, formats: :json, status: :unprocessable_entity
     end
   end
 
@@ -39,13 +43,14 @@ class PayrollsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_payroll
-      @payroll = Payroll.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def payroll_params
-      params.require(:payroll).permit(:employee_id, :cost_employee, :payroll_employee, :start_date, :end_date)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_payroll
+    @payroll = Payroll.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def payroll_params
+    params.require(:payroll).permit(:employee_id, :cost_employee, :payroll_employee, :start_date, :end_date)
+  end
 end

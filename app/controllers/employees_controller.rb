@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: %i[ show update destroy ]
+  before_action :set_employee, only: %i[show update destroy]
 
   # GET /employees
   def index
     @employees = Employee.all
 
-    render json: @employees
+    # render json: @employees
   end
 
   # GET /employees/1
@@ -18,9 +20,10 @@ class EmployeesController < ApplicationController
     @employee = Employee.new(employee_params)
 
     if @employee.save
-      render json: @employee, status: :created, location: @employee
+      render :create, status: :created, location: @employee
     else
-      render json: @employee.errors, status: :unprocessable_entity
+      # render json: @employee.errors, status: :unprocessable_entity
+      render 'errors/errors', locals: { object: @employee }, formats: :json, status: :unprocessable_entity
     end
   end
 
@@ -29,7 +32,8 @@ class EmployeesController < ApplicationController
     if @employee.update(employee_params)
       render json: @employee
     else
-      render json: @employee.errors, status: :unprocessable_entity
+      # render json: @employee.errors, status: :unprocessable_entity
+      render 'errors/errors', locals: { object: @employee }, formats: :json, status: :unprocessable_entity
     end
   end
 
@@ -39,13 +43,15 @@ class EmployeesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_employee
-      @employee = Employee.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def employee_params
-      params.require(:employee).permit(:payroll_period_id, :base_salary, :percentage_of_social_security, :percentage_of_pension_fund, :total_deductions, :non_salary_income, :other_dedections, :name, :document_identity)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_employee
+    @employee = Employee.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def employee_params
+    params.require(:employee).permit(:payroll_period_id, :base_salary, :percentage_of_social_security,
+                                     :percentage_of_pension_fund, :total_deductions, :non_salary_income, :other_dedections, :name, :document_identity)
+  end
 end

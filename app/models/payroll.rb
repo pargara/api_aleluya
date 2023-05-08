@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Payroll < ApplicationRecord
   belongs_to :employee
 
@@ -7,7 +9,7 @@ class Payroll < ApplicationRecord
   validates :end_date, presence: true
 
   private
-  
+
   def call_service
     service = PayrollService.new(self)
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Employee < ApplicationRecord
   include SetDefaultValues
 
@@ -5,8 +7,8 @@ class Employee < ApplicationRecord
 
   belongs_to :payroll_period
   has_many :payrolls
-	
-	validates :base_salary, presence: true
-	validates :name, presence: true
-	validates :document_identity, presence: true
+
+  validates :base_salary, presence: true
+  validates :name, presence: true
+  validates :document_identity, presence: true
 end

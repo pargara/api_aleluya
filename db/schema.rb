@@ -32,6 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_145206) do
     t.integer "base_salary", null: false
     t.float "percentage_of_social_security"
     t.float "percentage_of_pension_fund"
+    t.float "percentage_arl"
     t.float "solidarity_fund"
     t.float "subsistence_fund"
     t.integer "total_deductions"
@@ -47,7 +48,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_145206) do
     t.bigint "company_id", null: false
     t.float "percentage_of_social_security"
     t.float "percentage_of_pension_fund"
-    t.float "percentage_arl"
     t.float "compensation"
     t.float "icbf"
     t.float "sena"

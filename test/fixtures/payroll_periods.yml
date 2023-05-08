@@ -1,15 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  company: one
-  percentage_of_social_security: 1
-  percentage_of_pension_fund: 1
-  start_date: 2023-04-11
-  end_date: 2023-04-11
+payroll_period_one:
+  company: company_one
+  start_date: "2023-01-01"
+  end_date: "2023-02-01"
+  percentage_of_social_security: 8.5
+  percentage_of_pension_fund: 12
+  minimum_salary: 1160000
+  transport_subsidy: 140000
 
-two:
-  company: two
-  percentage_of_social_security: 1
-  percentage_of_pension_fund: 1
-  start_date: 2023-04-11
-  end_date: 2023-04-11
+payroll_period_two:
+  company: company_one
+  start_date: "2023-02-01"
+  end_date: "2023-03-01"
